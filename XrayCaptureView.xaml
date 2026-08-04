@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="DentFona.XrayCaptureView"
+             xmlns="http://microsoft.com"
+             xmlns:x="http://microsoft.com"
+             xmlns:mc="http://openxmlformats.org" 
+             xmlns:d="http://microsoft.com" 
+             mc:Ignorable="d" 
+             FlowDirection="RightToLeft" Background="#1E272C" d:DesignHeight="600" d:DesignWidth="950">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- الشريط الجانبي الأيمن للأزرار والفلاتر -->
+        <Border Grid.Column="0" Background="#2C3E50" Margin="5" CornerRadius="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="اسم المريض الحالي:" Foreground="White" Margin="0,0,0,5"/>
+                    <TextBox Name="TxtPatientName" Text="مريض تجريبي" Height="30" VerticalContentAlignment="Center" Background="#34495E" Foreground="White" BorderThickness="0" Margin="0,0,0,10"/>
+                    <Button Name="BtnStartCapture" Content="ابدأ التقاط الأشعة" Background="#2ECC71" Foreground="White" Height="40" FontWeight="Bold" Click="BtnStartCapture_Click"/>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="5">
+                    <StackPanel>
+                        <TextBlock Text="أدوات معالجة الصورة الطبية" Foreground="#BDC3C7" FontSize="11" Margin="5,5,5,10"/>
+                        <Button Name="BtnFilterNormal" Content="الصورة الأصلية" Margin="2" Height="32" Background="#34495E" Foreground="White" Click="Filter_Click"/>
+                        <Button Name="BtnFilterInvert" Content="قلب الألوان (Negative)" Margin="2" Height="32" Background="#34495E" Foreground="White" Click="Filter_Click"/>
+                        <Button Name="BtnFilterHistogram" Content="تحسين التباين التلقائي" Margin="2" Height="32" Background="#34495E" Foreground="White" Click="Filter_Click"/>
+                        <Button Name="BtnFilterSharp" Content="زيادة حدة التفاصيل (Sharp)" Margin="2" Height="32" Background="#34495E" Foreground="White" Click="Filter_Click"/>
+                        <Button Name="BtnFilterColor" Content="تلوين الأشعة الطبي (Bone)" Margin="2" Height="32" Background="#34495E" Foreground="White" Click="Filter_Click"/>
+                        <Separator Margin="0,15" Background="#455A64"/>
+                        <Button Name="BtnSaveImage" Content="حفظ الأشعة الحالية" Background="#3498DB" Foreground="White" Height="35" FontWeight="Bold" Click="BtnSaveImage_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- منطقة المعاينة والـ Histogram العلوي المدمج -->
+        <Grid Grid.Column="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- صندوق الهيستوجرام المصغر العلوي -->
+            <Border Grid.Row="0" Width="220" Height="100" HorizontalAlignment="Right" Background="#333333" BorderBrush="#555" BorderThickness="1" CornerRadius="4" Margin="10" Panel.ZIndex="10">
+                <Grid>
+                    <Image Name="ImgHistogram" Stretch="Fill"/>
+                    <TextBlock Text="رسم البياني للمعايرة Histogram" Foreground="#888" FontSize="10" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </Grid>
+            </Border>
+
+            <!-- شاشة عرض صورة الأشعة الكبرى -->
+            <Border Grid.Row="0" Grid.RowSpan="2" Background="#0A0A0A" CornerRadius="8">
+                <Grid>
+                    <Image Name="ImgMainXray" Stretch="Uniform" Margin="15"/>
+                    <TextBlock Name="TxtNoImageMsg" Text="في انتظار تفعيل الأشعة والالتقاط من مستشعر FONA..." Foreground="#555" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="DentFona.SettingsView"
+             xmlns="http://microsoft.com"
+             xmlns:x="http://microsoft.com"
+             xmlns:mc="http://openxmlformats.org" 
+             xmlns:d="http://microsoft.com" 
+             mc:Ignorable="d" 
+             FlowDirection="RightToLeft" Background="#F0F4F8" d:DesignHeight="550" d:DesignWidth="850">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- الشعار والعنوان علوي -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+            <TextBlock Text="DENT FONA" FontSize="22" FontWeight="Bold" Foreground="#1B365D"/>
+            <TextBlock Text=" | إعدادات النظام والمعايرة" FontSize="14" VerticalAlignment="Bottom" Foreground="#7F8C8D" Margin="5,0,0,3"/>
+        </StackPanel>
+
+        <!-- محتوى الإعدادات ومسار ملف المعايرة -->
+        <Grid Grid.Row="1">
+            <StackPanel Margin="0,0,15,0">
+                <!-- مسار حفظ الصور -->
+                <GroupBox Header="مسار حفظ البيانات والصور" Margin="0,0,0,15" Padding="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="TxtImagesPath" Height="30" VerticalContentAlignment="Center" IsReadOnly="True" Background="#F9F9F9"/>
+                        <Button Name="BtnBrowseFolder" Grid.Column="1" Content="استكشف" Width="80" Margin="10,0,0,0" Click="BtnBrowseFolder_Click"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- ملف معايرة السنسور الخاص بـ FONA -->
+                <GroupBox Header="ملف معايرة السينسور (Sensor Calibration)" Margin="0,0,0,15" Padding="10" BorderBrush="#E74C3C">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="TxtCalibPath" Height="30" VerticalContentAlignment="Center" IsReadOnly="True" Background="#FFF5F5" BorderBrush="#E74C3C"/>
+                        <Button Name="BtnBrowseCalib" Grid.Column="1" Content="اختيار ملف .cal" Width="100" Margin="10,0,0,0" Click="BtnBrowseCalib_Click"/>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+
+        <!-- أزرار الحفظ والإلغاء السفليّة -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,15,0,0">
+            <Button Name="BtnApply" Content="حفظ الإعدادات" Width="120" Height="35" Background="Green" Foreground="White" FontWeight="Bold" Click="BtnApply_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
