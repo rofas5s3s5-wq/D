@@ -2,7 +2,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Dicom;
+using FellowOakDicom;
+using FellowOakDicom.Imaging;
 using DentFonaViewer.Helpers;
 
 namespace DentFonaViewer.Services
@@ -31,9 +32,9 @@ namespace DentFonaViewer.Services
             {
                 if (ext == ".dcm")
                 {
-                    // Use fo-dicom to open and render
+                    // Use fo-dicom (FellowOakDicom) to open and render
                     var dcm = await Task.Run(() => DicomFile.Open(path));
-                    var dicomImage = new Dicom.Imaging.DicomImage(dcm.Dataset);
+                    var dicomImage = new DicomImage(dcm.Dataset);
                     using var sysBmp = dicomImage.RenderImage().As<System.Drawing.Bitmap>();
                     bmp = ImageConversion.BitmapToBitmapSource(sysBmp);
                 }
@@ -75,8 +76,8 @@ namespace DentFonaViewer.Services
 
         public void SaveAsDicom(BitmapSource bmp, string patientId = "UNKNOWN")
         {
-            // output folder
-            var outDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DentFona\SavedDICOM");
+            // output folder (use Path.Combine for safe separators)
+            var outDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DentFona", "SavedDICOM");
             Directory.CreateDirectory(outDir);
             var outPath = Path.Combine(outDir, $"SC_{DateTime.Now:yyyyMMdd_HHmmss}.dcm");
             _dicomService.SaveBitmapSourceAsDicom(bmp, outPath, _calib.PixelsPerMm);
