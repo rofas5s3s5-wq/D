@@ -9,12 +9,14 @@ using System.Windows.Media.Imaging;
 namespace DentFonaViewer.Helpers
 {
     internal static class ImageConversion
-n    {
+    {
         [DllImport("gdi32.dll")]
         private static extern bool DeleteObject(IntPtr hObject);
 
         public static BitmapSource BitmapToBitmapSource(Bitmap bmp)
         {
+            if (bmp == null) throw new ArgumentNullException(nameof(bmp));
+
             var hBitmap = bmp.GetHbitmap();
             try
             {
@@ -30,6 +32,8 @@ n    {
 
         public static BitmapSource BytesBmpToBitmapSource(byte[] bmpBytes)
         {
+            if (bmpBytes == null) throw new ArgumentNullException(nameof(bmpBytes));
+
             using var ms = new MemoryStream(bmpBytes);
             using var bmp = new Bitmap(ms);
             return BitmapToBitmapSource(bmp);
@@ -37,7 +41,8 @@ n    {
 
         public static Bitmap BitmapSourceToBitmap(BitmapSource source)
         {
-            if (source == null) return null!;
+            if (source == null) throw new ArgumentNullException(nameof(source));
+
             var encoder = new BmpBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(source));
             using var ms = new MemoryStream();
