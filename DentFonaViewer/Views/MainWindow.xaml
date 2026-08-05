@@ -1,0 +1,43 @@
+<Window x:Class="DentFonaViewer.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DentFona Viewer" Height="700" Width="1000" FlowDirection="RightToLeft" Language="ar-SA">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" Background="#FF2D2D30">
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Name="BtnStartWatcher" Margin="6" Padding="8,4" Click="BtnStartWatcher_Click">بدء المراقبة</Button>
+                <Button Name="BtnStopWatcher" Margin="6" Padding="8,4" Click="BtnStopWatcher_Click">إيقاف المراقبة</Button>
+                <Button Name="BtnCapture" Margin="6" Padding="8,4" Click="BtnCapture_Click">التقاط</Button>
+                <Button Name="BtnSaveDicom" Margin="6" Padding="8,4" Click="BtnSaveDicom_Click">حفظ DICOM</Button>
+                <Button Name="BtnNegative" Margin="6" Padding="8,4" Click="BtnNegative_Click">سالب</Button>
+                <Button Name="BtnCLAHE" Margin="6" Padding="8,4" Click="BtnCLAHE_Click">تحسين (CLAHE)</Button>
+            </StackPanel>
+        </ToolBar>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="8" BorderBrush="#FFCCCCCC" BorderThickness="1">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Image Name="MainImage" Stretch="Uniform"/>
+                </ScrollViewer>
+            </Border>
+
+            <StackPanel Grid.Column="1" Margin="8">
+                <TextBlock FontWeight="Bold" FontSize="16" TextAlignment="Center">الصور الواردة</TextBlock>
+                <ListBox Name="LstRecent" Height="400" Margin="0,8,0,8" />
+                <TextBlock Name="TxtStatus" Text="جاهز" TextWrapping="Wrap"/>
+                <TextBlock Name="TxtCalibration" Text="المعايرة: لم تقرأ بعد" Margin="0,8,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="StatusBarText">DentFona Viewer — جاهز</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </DockPanel>
+</Window>
